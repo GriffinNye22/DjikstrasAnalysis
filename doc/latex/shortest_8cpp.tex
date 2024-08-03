@@ -1,0 +1,239 @@
+\hypertarget{shortest_8cpp}{
+\section{shortest.cpp File Reference}
+\label{shortest_8cpp}\index{shortest.cpp@{shortest.cpp}}
+}
+
+
+CSC402 Dr. Spiegel Spring 2020-\/ Constructs a graph using an adjacency list given from an input file then computes the minimum cost path from the first vertex for each vertex in the graph using Djikstra's algorithm, before outputting the graph, the minimum cost paths for each vertex along with their costs, and the number of microseconds it took to compute. Due Date: 2/28/20 Assignment: \#2.  
+{\ttfamily \#include $<$chrono$>$}\par
+{\ttfamily \#include $<$climits$>$}\par
+{\ttfamily \#include $<$iomanip$>$}\par
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$fstream$>$}\par
+{\ttfamily \#include $<$map$>$}\par
+{\ttfamily \#include $<$sstream$>$}\par
+{\ttfamily \#include $<$string$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$queue$>$}\par
+{\ttfamily \#include $<$vector$>$}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structNode}{Node}
+\item 
+class \hyperlink{classnodeComparison}{nodeComparison}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{shortest_8cpp_a9d7e8af417b6d543da691e9c0e2f6f9f}{clearScreen} ()
+\begin{DoxyCompactList}\small\item\em Clears the contents of the screen for improved readability. \item\end{DoxyCompactList}\item 
+string \hyperlink{shortest_8cpp_a4ed5a3985acb39a1e45e8b28a872e2ec}{getInFile} ()
+\begin{DoxyCompactList}\small\item\em Prompts the user for the input filename and returns the given string. \item\end{DoxyCompactList}\item 
+string \hyperlink{shortest_8cpp_a5fb4e5ca07422c93b9cf0366f6b8b364}{getOutFile} ()
+\begin{DoxyCompactList}\small\item\em Prompts the user for the output filename and returns the given string. \item\end{DoxyCompactList}\item 
+bool \hyperlink{shortest_8cpp_a4e623de98024f0452cc501711e4c1fa2}{openFile} (ifstream \&file, const string filename)
+\begin{DoxyCompactList}\small\item\em Attempts to open the file, returning error message upon failure. \item\end{DoxyCompactList}\item 
+int \hyperlink{shortest_8cpp_a5b948aa9aa4d1082721365afc2a8f3eb}{getNumNodes} (ifstream \&file)
+\begin{DoxyCompactList}\small\item\em Retrieves the number of nodes from the file. \item\end{DoxyCompactList}\item 
+chrono::time\_\-point$<$ chrono::high\_\-resolution\_\-clock $>$ \hyperlink{shortest_8cpp_adf0a6b7e52dd3fd7f989b35900a70338}{fillAdjList} (ifstream \&file, multimap$<$ int, \hyperlink{structNode}{Node} $>$ \&adj)
+\begin{DoxyCompactList}\small\item\em Fills the adjacency list using the input text file. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_a06c7ea295b1f984b458d2728ad2c914f}{printAdjList} (const multimap$<$ int, \hyperlink{structNode}{Node} $>$ \&adj)
+\begin{DoxyCompactList}\small\item\em Prints the contents of the adjacency list. \item\end{DoxyCompactList}\item 
+chrono::time\_\-point$<$ chrono::high\_\-resolution\_\-clock $>$ \hyperlink{shortest_8cpp_a79110ed6df1347e5f8e1944d38cbdb75}{findShortestPaths} (multimap$<$ int, \hyperlink{structNode}{Node} $>$ \&adj, vector$<$ int $>$ \&cost, int num, int parent\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Finds the shortest path from the source vertex to each vertex in the graphdefaults and returns time of finish. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_ab75298fa7b126a7db0374dcfca617a33}{findShortestPathsHelper} (multimap$<$ int, \hyperlink{structNode}{Node} $>$ \&adj, vector$<$ int $>$ \&cost, int $\ast$marked, priority\_\-queue$<$ \hyperlink{structNode}{Node}, vector$<$ \hyperlink{structNode}{Node} $>$, \hyperlink{classnodeComparison}{nodeComparison} $>$ \&pq, int currVertex, int currCost, int parent\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Helper function for findShortestPaths, Retrieves the current vertex's neighbors and updates costs. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_ac9490639b4988b3fb162ef38edc23ca7}{initMarked} (int mark\mbox{[}$\,$\mbox{]}, int num)
+\begin{DoxyCompactList}\small\item\em Initalizes all vertices as unmarked(0) for Djikstra's. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_a33fc78f11d5bc9be94bbc42295019a4a}{initCost} (vector$<$ int $>$ \&cost)
+\begin{DoxyCompactList}\small\item\em Initializes the cost of all vertices to INT\_\-MAX for Djikstra's. \item\end{DoxyCompactList}\item 
+string \hyperlink{shortest_8cpp_aa43295e6662a630de129cdd9275bdb22}{pathToString} (const int parent\mbox{[}$\,$\mbox{]}, int elt)
+\begin{DoxyCompactList}\small\item\em Converts path into a string for printing of paths. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_a6a0a7ffe38b5a0499609fdc719b40ba6}{printCostsAndPaths} (vector$<$ int $>$ \&cost, const int parent\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Prints the minimum costs and minimum cost paths for all vertices. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_a971f9c72905860f31dd66aaa7f5b3ec1}{printTime} (chrono::microseconds ticks)
+\begin{DoxyCompactList}\small\item\em Prints the time in microseconds to perform the algorithm. \item\end{DoxyCompactList}\item 
+void \hyperlink{shortest_8cpp_a42eeec417468f1cd112c524dfe4bb1f6}{recordTime} (string file, chrono::microseconds ticks)
+\begin{DoxyCompactList}\small\item\em Records the time taken for the algorithm to be performed by appending to output file. \item\end{DoxyCompactList}\item 
+int \hyperlink{shortest_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+CSC402 Dr. Spiegel Spring 2020-\/ Constructs a graph using an adjacency list given from an input file then computes the minimum cost path from the first vertex for each vertex in the graph using Djikstra's algorithm, before outputting the graph, the minimum cost paths for each vertex along with their costs, and the number of microseconds it took to compute. Due Date: 2/28/20 Assignment: \#2. \begin{DoxyAuthor}{Author}
+Griffin Nye 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\hypertarget{shortest_8cpp_a9d7e8af417b6d543da691e9c0e2f6f9f}{
+\index{shortest.cpp@{shortest.cpp}!clearScreen@{clearScreen}}
+\index{clearScreen@{clearScreen}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{clearScreen}]{\setlength{\rightskip}{0pt plus 5cm}void clearScreen ()}}
+\label{shortest_8cpp_a9d7e8af417b6d543da691e9c0e2f6f9f}
+
+
+Clears the contents of the screen for improved readability. clearScreen: \hypertarget{shortest_8cpp_adf0a6b7e52dd3fd7f989b35900a70338}{
+\index{shortest.cpp@{shortest.cpp}!fillAdjList@{fillAdjList}}
+\index{fillAdjList@{fillAdjList}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{fillAdjList}]{\setlength{\rightskip}{0pt plus 5cm}chrono::time\_\-point$<$ chrono::high\_\-resolution\_\-clock $>$ fillAdjList (ifstream \& {\em file}, \/  multimap$<$ int, {\bf Node} $>$ \& {\em adj})}}
+\label{shortest_8cpp_adf0a6b7e52dd3fd7f989b35900a70338}
+
+
+Fills the adjacency list using the input text file. fillAdjList: 
+\begin{DoxyParams}{Parameters}
+\item[{\em file}]the input stream for the file-\/ INPUT/OUTPUT \item[{\em adj}]the adjacency list-\/ INPUT/OUTPUT \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+start the current time in microseconds at commencement of algorithm 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_a79110ed6df1347e5f8e1944d38cbdb75}{
+\index{shortest.cpp@{shortest.cpp}!findShortestPaths@{findShortestPaths}}
+\index{findShortestPaths@{findShortestPaths}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{findShortestPaths}]{\setlength{\rightskip}{0pt plus 5cm}chrono::time\_\-point$<$ chrono::high\_\-resolution\_\-clock $>$ findShortestPaths (multimap$<$ int, {\bf Node} $>$ \& {\em adj}, \/  vector$<$ int $>$ \& {\em cost}, \/  int {\em num}, \/  int {\em parent}\mbox{[}$\,$\mbox{]})}}
+\label{shortest_8cpp_a79110ed6df1347e5f8e1944d38cbdb75}
+
+
+Finds the shortest path from the source vertex to each vertex in the graphdefaults and returns time of finish. findShortestPaths: 
+\begin{DoxyParams}{Parameters}
+\item[{\em adj}]the adjacency list-\/ INPUT/OUTPUT \item[{\em cost}]vector containing the cost of the shortest path for each vertex-\/ INPUT/OUTPUT \item[{\em num}]the number of vertices in the graph-\/INPUT \item[{\em parent}]the array containing the parent of each vertex INPUT/OUTPUT \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std::chrono::high\_\-resolution\_\-clock::now() current time in microseconds at completion of algorithm 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_ab75298fa7b126a7db0374dcfca617a33}{
+\index{shortest.cpp@{shortest.cpp}!findShortestPathsHelper@{findShortestPathsHelper}}
+\index{findShortestPathsHelper@{findShortestPathsHelper}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{findShortestPathsHelper}]{\setlength{\rightskip}{0pt plus 5cm}void findShortestPathsHelper (multimap$<$ int, {\bf Node} $>$ \& {\em adj}, \/  vector$<$ int $>$ \& {\em cost}, \/  int $\ast$ {\em marked}, \/  priority\_\-queue$<$ {\bf Node}, vector$<$ {\bf Node} $>$, {\bf nodeComparison} $>$ \& {\em pq}, \/  int {\em currVertex}, \/  int {\em currCost}, \/  int {\em parent}\mbox{[}$\,$\mbox{]})}}
+\label{shortest_8cpp_ab75298fa7b126a7db0374dcfca617a33}
+
+
+Helper function for findShortestPaths, Retrieves the current vertex's neighbors and updates costs. findShortestPathsHelper: 
+\begin{DoxyParams}{Parameters}
+\item[{\em adj}]the adjacency list-\/ INPUT/OUTPUT \item[{\em cost}]vector containing the cost of the shortest path for each vertex-\/ INPUT/OUTPUT \item[{\em marked}]the marked array (0=unmarked, 1=marked)-\/ INPUT/OUTPUT \item[{\em pq}]the priority\_\-queue-\/ INPUT/OUTPUT \item[{\em currVertex}]the current vertex-\/ INPUT \item[{\em currCost}]the current cost-\/ INPUT \item[{\em parent}]the array containing the parent of each vertex-\/ INPUT/OUTPUT \end{DoxyParams}
+\hypertarget{shortest_8cpp_a4ed5a3985acb39a1e45e8b28a872e2ec}{
+\index{shortest.cpp@{shortest.cpp}!getInFile@{getInFile}}
+\index{getInFile@{getInFile}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{getInFile}]{\setlength{\rightskip}{0pt plus 5cm}string getInFile ()}}
+\label{shortest_8cpp_a4ed5a3985acb39a1e45e8b28a872e2ec}
+
+
+Prompts the user for the input filename and returns the given string. getInFile: \begin{DoxyReturn}{Returns}
+filename the provided filename 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_a5b948aa9aa4d1082721365afc2a8f3eb}{
+\index{shortest.cpp@{shortest.cpp}!getNumNodes@{getNumNodes}}
+\index{getNumNodes@{getNumNodes}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{getNumNodes}]{\setlength{\rightskip}{0pt plus 5cm}int getNumNodes (ifstream \& {\em file})}}
+\label{shortest_8cpp_a5b948aa9aa4d1082721365afc2a8f3eb}
+
+
+Retrieves the number of nodes from the file. getNumNodes: 
+\begin{DoxyParams}{Parameters}
+\item[{\em file}]the input stream for the file-\/ INPUT/OUTPUT \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int(line) the number of nodes 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_a5fb4e5ca07422c93b9cf0366f6b8b364}{
+\index{shortest.cpp@{shortest.cpp}!getOutFile@{getOutFile}}
+\index{getOutFile@{getOutFile}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{getOutFile}]{\setlength{\rightskip}{0pt plus 5cm}string getOutFile ()}}
+\label{shortest_8cpp_a5fb4e5ca07422c93b9cf0366f6b8b364}
+
+
+Prompts the user for the output filename and returns the given string. getOutFile: \begin{DoxyReturn}{Returns}
+filename the provided filename 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_a33fc78f11d5bc9be94bbc42295019a4a}{
+\index{shortest.cpp@{shortest.cpp}!initCost@{initCost}}
+\index{initCost@{initCost}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{initCost}]{\setlength{\rightskip}{0pt plus 5cm}void initCost (vector$<$ int $>$ \& {\em cost})}}
+\label{shortest_8cpp_a33fc78f11d5bc9be94bbc42295019a4a}
+
+
+Initializes the cost of all vertices to INT\_\-MAX for Djikstra's. initCost: 
+\begin{DoxyParams}{Parameters}
+\item[{\em cost}]vector containing the costs for all vertices-\/ INPUT/OUTPUT \end{DoxyParams}
+\hypertarget{shortest_8cpp_ac9490639b4988b3fb162ef38edc23ca7}{
+\index{shortest.cpp@{shortest.cpp}!initMarked@{initMarked}}
+\index{initMarked@{initMarked}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{initMarked}]{\setlength{\rightskip}{0pt plus 5cm}void initMarked (int {\em mark}\mbox{[}$\,$\mbox{]}, \/  int {\em num})}}
+\label{shortest_8cpp_ac9490639b4988b3fb162ef38edc23ca7}
+
+
+Initalizes all vertices as unmarked(0) for Djikstra's. initMarked 
+\begin{DoxyParams}{Parameters}
+\item[{\em mark}]the marked array-\/ INPUT/OUTPUT \item[{\em num}]the number of vertices-\/ INPUT \end{DoxyParams}
+\hypertarget{shortest_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{
+\index{shortest.cpp@{shortest.cpp}!main@{main}}
+\index{main@{main}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$ {\em argv}\mbox{[}$\,$\mbox{]})}}
+\label{shortest_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+main 
+\begin{DoxyParams}{Parameters}
+\item[{\em argc}]the number of command line arguments \item[{\em argv}]the command line arguments \end{DoxyParams}
+\hypertarget{shortest_8cpp_a4e623de98024f0452cc501711e4c1fa2}{
+\index{shortest.cpp@{shortest.cpp}!openFile@{openFile}}
+\index{openFile@{openFile}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{openFile}]{\setlength{\rightskip}{0pt plus 5cm}bool openFile (ifstream \& {\em file}, \/  const string {\em filename})}}
+\label{shortest_8cpp_a4e623de98024f0452cc501711e4c1fa2}
+
+
+Attempts to open the file, returning error message upon failure. openFile: 
+\begin{DoxyParams}{Parameters}
+\item[{\em file}]filestream used to open the file-\/ INPUT/OUTPUT \item[{\em filename}]the name of the file to open-\/ INPUT \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+fileOpen true = success, false = failure 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_aa43295e6662a630de129cdd9275bdb22}{
+\index{shortest.cpp@{shortest.cpp}!pathToString@{pathToString}}
+\index{pathToString@{pathToString}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{pathToString}]{\setlength{\rightskip}{0pt plus 5cm}string pathToString (const int {\em parent}\mbox{[}$\,$\mbox{]}, \/  int {\em elt})}}
+\label{shortest_8cpp_aa43295e6662a630de129cdd9275bdb22}
+
+
+Converts path into a string for printing of paths. pathToString: 
+\begin{DoxyParams}{Parameters}
+\item[{\em parent}]the array containing the parent of each vertex-\/ OUTPUT \item[{\em elt}]the index of the element whose path is to be converted-\/ INPUT \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ss.str() string form of the path vector 
+\end{DoxyReturn}
+\hypertarget{shortest_8cpp_a06c7ea295b1f984b458d2728ad2c914f}{
+\index{shortest.cpp@{shortest.cpp}!printAdjList@{printAdjList}}
+\index{printAdjList@{printAdjList}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{printAdjList}]{\setlength{\rightskip}{0pt plus 5cm}void printAdjList (const multimap$<$ int, {\bf Node} $>$ \& {\em adj})}}
+\label{shortest_8cpp_a06c7ea295b1f984b458d2728ad2c914f}
+
+
+Prints the contents of the adjacency list. printAdjList: 
+\begin{DoxyParams}{Parameters}
+\item[{\em adj}]the adjacency list-\/ INPUT \end{DoxyParams}
+\hypertarget{shortest_8cpp_a6a0a7ffe38b5a0499609fdc719b40ba6}{
+\index{shortest.cpp@{shortest.cpp}!printCostsAndPaths@{printCostsAndPaths}}
+\index{printCostsAndPaths@{printCostsAndPaths}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{printCostsAndPaths}]{\setlength{\rightskip}{0pt plus 5cm}void printCostsAndPaths (vector$<$ int $>$ \& {\em cost}, \/  const int {\em parent}\mbox{[}$\,$\mbox{]})}}
+\label{shortest_8cpp_a6a0a7ffe38b5a0499609fdc719b40ba6}
+
+
+Prints the minimum costs and minimum cost paths for all vertices. printCostsAndPaths: 
+\begin{DoxyParams}{Parameters}
+\item[{\em parent}]the array containing the parent of each vertex-\/ OUTPUT \item[{\em cost}]the cost list-\/ INPUT/OUTPUT \end{DoxyParams}
+\hypertarget{shortest_8cpp_a971f9c72905860f31dd66aaa7f5b3ec1}{
+\index{shortest.cpp@{shortest.cpp}!printTime@{printTime}}
+\index{printTime@{printTime}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{printTime}]{\setlength{\rightskip}{0pt plus 5cm}void printTime (chrono::microseconds {\em ticks})}}
+\label{shortest_8cpp_a971f9c72905860f31dd66aaa7f5b3ec1}
+
+
+Prints the time in microseconds to perform the algorithm. printTime: 
+\begin{DoxyParams}{Parameters}
+\item[{\em ticks}]the number of microseconds \end{DoxyParams}
+\hypertarget{shortest_8cpp_a42eeec417468f1cd112c524dfe4bb1f6}{
+\index{shortest.cpp@{shortest.cpp}!recordTime@{recordTime}}
+\index{recordTime@{recordTime}!shortest.cpp@{shortest.cpp}}
+\subsubsection[{recordTime}]{\setlength{\rightskip}{0pt plus 5cm}void recordTime (string {\em file}, \/  chrono::microseconds {\em ticks})}}
+\label{shortest_8cpp_a42eeec417468f1cd112c524dfe4bb1f6}
+
+
+Records the time taken for the algorithm to be performed by appending to output file. recordTime: 
+\begin{DoxyParams}{Parameters}
+\item[{\em file}]the output file \item[{\em ticks}]the number of microseconds to perform the algorithm \end{DoxyParams}
